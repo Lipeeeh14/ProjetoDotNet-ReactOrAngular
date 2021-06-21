@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ApiProdutos.Data.MySQL;
+﻿using Microsoft.AspNetCore.Mvc;
 using ApiProdutos.Domain.Models;
 using ApiProdutos.Domain.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiProdutos.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProdutosController : ControllerBase
@@ -46,6 +41,7 @@ namespace ApiProdutos.Controllers
             return Ok(produto);
         }
 
+        [ClaimsAuthorize("Produto", "Incluir")]
         [HttpPost]
         public IActionResult PostProduto([FromBody] Produto produto)
         {
@@ -53,6 +49,7 @@ namespace ApiProdutos.Controllers
             return Ok(_produtoService.Create(produto));
         }
 
+        [ClaimsAuthorize("Produto","Editar")]
         [HttpPut("put-by-id")]
         public IActionResult PutProduto([FromQuery] long id, [FromBody] Produto produto)
         {
@@ -60,6 +57,7 @@ namespace ApiProdutos.Controllers
             return BadRequest();
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [HttpDelete("delete-by-id")]
         public IActionResult DeleteProduto(long id)
         {
