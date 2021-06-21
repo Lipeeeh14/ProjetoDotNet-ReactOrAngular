@@ -1,10 +1,8 @@
 ﻿using ApiProdutos.Data.MySQL;
 using ApiProdutos.Data.Repositories.Generic;
 using ApiProdutos.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiProdutos.Data.Repositories
 {

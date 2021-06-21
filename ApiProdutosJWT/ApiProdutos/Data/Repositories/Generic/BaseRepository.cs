@@ -51,6 +51,7 @@ namespace ApiProdutos.Data.Repositories.Generic
             {
                 try
                 {
+                    item.Id = id;
                     _context.Entry(result).CurrentValues.SetValues(item);
                     _context.SaveChanges();
                     return result;
